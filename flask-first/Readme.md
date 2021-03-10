@@ -19,13 +19,18 @@ http {
     server {
         listen       80;
         server_name  www.testzy.com localhost;
+        # 输入127.0.0.1/ 返回index.html
         location / {
             root   html;
             index  index.html index.htm;
         }
+
+        # 访问/api/*路径时，后端服务器处理
         location /api {
             proxy_pass http://127.0.0.1:8000/api;
         }
+
+        # 访问静态资源时，从nginx html目录下查找
         location ~ .*\.(html|htm|jpg|png|bmp|gif|jepg|css|js|css|ico|txt){
             root   html;
             index  index.html index.htm;
