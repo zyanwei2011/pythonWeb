@@ -1,6 +1,6 @@
 ### 前后端分离部署nginx配置
 
-
+```shell
 worker_processes  1;
 error_log  logs/error.log  info;
 pid        logs/nginx.pid;
@@ -37,3 +37,4 @@ http {
         }
     }
 }
+```
