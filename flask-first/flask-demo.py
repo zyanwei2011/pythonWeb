@@ -41,9 +41,9 @@ interface_data = {
 }
 
 
-@app.route('/api/', methods=['get'])
-def index():
-    return render_template('index.html')
+# @app.route('/api/', methods=['get'])
+# def index():
+#     return render_template('index.html')
 
 
 @app.route('/api/login', methods=['post'])
