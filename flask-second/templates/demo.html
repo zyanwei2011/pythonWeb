@@ -14,10 +14,10 @@
 
 <form action="{{ url_for('login') }}" method="POST">
     {{ form.hidden_tag() }}
-    <label>手机号：</label><input type="text" name="phone", value=''>
+    {{ form.phone.label }}: {{ form.phone }}
     <label>密码：</label><input type="password" name="pwd", value=''>
     <label>确认密码：</label><input type="password" name="confirm_pwd", value=''>
-    <label>年龄：</label><input type="password" name="confirm_pwd", value=''>
+    <label>年龄：</label><input type="text" name="age", value=''>
     <input type="submit" name="login_btn", value="登陆">
 </form>
     
