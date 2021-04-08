@@ -14,10 +14,17 @@
 
 <form action="{{ url_for('login') }}" method="POST">
     {{ form.hidden_tag() }}
-    {{ form.phone.label }}: {{ form.phone }}
-    <label>密码：</label><input type="password" name="pwd", value=''>
-    <label>确认密码：</label><input type="password" name="confirm_pwd", value=''>
-    <label>年龄：</label><input type="text" name="age", value=''>
+    {{ form.phone.label }} {{ form.phone }}
+    {{ form.pwd.label }}{{ form.pwd }}
+    {{ form.confirm_pwd.label }}{{ form.confirm_pwd }}
+    {{ form.age.label }}{{ form.age }}
+    {{ form.email.label }} {{ form.email }}
+    {{ form.gender.label }} {{ form.gender }}
+    {{ form.height.label }}{{ form.height }}
+    {{ form.birthday.label }}{{ form.birthday }}
+    {{ form.birthday.label }}{{ form.birthday }}
+    {{ form.job.label }}{{ form.job }}
+    {{ form.hobby.label }} {{ form.hobby }}
     <input type="submit" name="login_btn", value="登陆">
 </form>
     
