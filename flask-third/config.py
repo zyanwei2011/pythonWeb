@@ -7,7 +7,7 @@ username = 'root'
 password = '123456'
 host = '47.96.67.53'
 port = 3306
-database = 'db01'
+database = 'db03'
 
 
 SQLALCHEMY_DATABASE_URI = '{}+{}://{}:{}@{}:{}/{}?charset=utf8mb4'.format(dialect, driver, username, password, host,port, database)
