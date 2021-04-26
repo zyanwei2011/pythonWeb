@@ -15,13 +15,15 @@ db.init_app(app)
 @app.route('/')
 def index():
     context = {
-        'questions': Question.query.order_by('-create_time').all()
+        'questions': Question.query.order_by('create_time').all()
     }
     return render_template('index.html',**context)
 
 
 @app.route('/login/',methods=['GET','POST'])
 def login():
+    if session.get('user_id'):
+        return redirect(url_for('index'))
     if request.method == 'GET':
         return render_template('login.html')
     else:
@@ -38,6 +40,8 @@ def login():
 
 @app.route('/regist/',methods=['GET','POST'])
 def regist():
+    if session.get('user_id'):
+        return redirect(url_for('index'))
     if request.method == 'GET':
         return render_template('regist.html')
     else:
@@ -63,8 +67,6 @@ def regist():
 
 @app.route('/logout/')
 def logout():
-    # session.pop('user_id')
-    # del session['user_id']
     session.clear()
     return redirect(url_for('login'))
 
