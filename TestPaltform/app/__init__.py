@@ -1,8 +1,11 @@
+"""
+初始化
+"""
+
 from flask import Flask
 
 
 def create_app():
-
     # 初始化
     app = Flask(__name__)
 
@@ -11,7 +14,7 @@ def create_app():
     app.config.from_object(config)
 
     # 蓝图注册
-    from app.main.views import main
+    from app.main import main
     app.register_blueprint(main)
 
     # 数据库初始化
@@ -19,6 +22,6 @@ def create_app():
     db.init_app(app)
     from flask_migrate import Migrate
     migrate = Migrate()
-    migrate.init_app(app,db)
+    migrate.init_app(app, db)
 
     return app
