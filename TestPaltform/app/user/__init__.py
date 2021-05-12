@@ -1,7 +1,7 @@
 
 from flask import Blueprint
 
-main = Blueprint('main', __name__)
+main = Blueprint('main', __name__, url_prefix='/test')
 
 from .views.index import index
 from .views.projects import create_projects, list_projects

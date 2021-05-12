@@ -23,9 +23,10 @@ def create_app():
 
     # 数据库初始化
     from app.main.models.user import db
+    from app.main.models.main import db
     db.init_app(app)
 
-
+    # 绑定db和app
     from flask_migrate import Migrate
     migrate = Migrate()
     migrate.init_app(app, db)
