@@ -1,11 +1,12 @@
 from flask_sqlalchemy import SQLAlchemy
+from flask import current_app
 import time
 
 
 db = SQLAlchemy()
 
 
-class Base(db.Model):
+class BaseDb(db.Model):
     """
     定义基类表,其他表可继承该类
     `__abstract__`属性为True时不建表
@@ -16,9 +17,20 @@ class Base(db.Model):
     created_time = db.Column(db.Integer, default=int(time.time()))
     updated_time = db.Column(db.Integer, default=int(time.time()), onupdate=int(time.time()))
 
+    @classmethod
+    def all(cls):
+        """
+        查询全部
+        """
+        return cls.query.order_by(cls.id.desc).all()  # 倒序
 
-class User(Base):
-    __tablename__ = 'user'
-    telephone = db.Column(db.String(11), nullable=False)
-    username = db.Column(db.String(50), nullable=False)
-    password = db.Column(db.String(100), nullable=False)
+    @classmethod
+    def paginate(cls, page):
+        """
+        分页查询
+        """
+        return cls.query.paginate(page=page, per_page=current_app.config.get('PER_PAGE'), error_out=False)
+
+
+
+

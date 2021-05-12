@@ -17,9 +17,15 @@ def create_app():
     from app.main import main
     app.register_blueprint(main)
 
+    # 添加过滤器
+    from app.main.template_env import str_time
+    app.add_template_filter(str_time)
+
     # 数据库初始化
-    from app.main.models import db
+    from app.main.models.user import db
     db.init_app(app)
+
+
     from flask_migrate import Migrate
     migrate = Migrate()
     migrate.init_app(app, db)
