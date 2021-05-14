@@ -1,6 +1,7 @@
 from flask_sqlalchemy import SQLAlchemy
-from flask import current_app
+from flask import current_app, jsonify, request
 import time
+import json
 
 
 db = SQLAlchemy()
@@ -22,14 +23,17 @@ class BaseDb(db.Model):
         """
         查询全部
         """
-        return cls.query.order_by(cls.id.desc).all()  # 倒序
+        data = cls.query.all()
+        return str(data)
 
     @classmethod
-    def paginate(cls, page):
+    def paginate(cls):
         """
         分页查询
         """
-        return cls.query.paginate(page=page, per_page=current_app.config.get('PER_PAGE'), error_out=False)
+        page = request.args.get('page', 1)
+        per_page = current_app.config.get('PER_PAGE')
+        return cls.query.paginate(page=page, per_page=per_page, error_out=False)
 
 
 

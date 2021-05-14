@@ -40,3 +40,11 @@ flask db upgrade
 flask db downgrade
 ```
 
+### curl
+```shell script
+# 创建项目
+ curl 'http://127.0.0.1:5000/main/project_create' -X POST -d 'project_name=99991237&project_desc=88881'
+
+# 查询项目
+ curl 'http://127.0.0.1:5000/main/project_list' 
+```
