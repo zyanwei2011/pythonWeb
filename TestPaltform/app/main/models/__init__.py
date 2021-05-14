@@ -23,17 +23,17 @@ class BaseDb(db.Model):
         """
         查询全部
         """
-        data = cls.query.all()
+        data = cls.query.filter_by(status=1).order_by(cls.id.desc()).all()
         return str(data)
 
     @classmethod
-    def paginate(cls):
+    def paginate(cls, page=1):
         """
         分页查询
         """
-        page = request.args.get('page', 1)
         per_page = current_app.config.get('PER_PAGE')
-        return cls.query.paginate(page=page, per_page=per_page, error_out=False)
+        # error_out: 部分小错误不提醒
+        return cls.query.filter_by(status=1).paginate(page=page, per_page=per_page, error_out=False)
 
 
 

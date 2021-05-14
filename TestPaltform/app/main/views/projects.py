@@ -15,10 +15,8 @@ from flask import render_template
 @main.route('/project_list', methods=['GET'])
 def project_list():
     """查询项目"""
-    # return str(Project.all())
-    paginate = Project.paginate()
-    projects = paginate.items
-    return str(projects)
+    return str(Project.all())
+    # return str(Project.paginate().items)
 
 
 @main.route('/project_create', methods=['GET', 'POST'])
@@ -32,3 +30,5 @@ def project_create():
         return 'success'
     else:
         return f'{form.errors}'
+
+
