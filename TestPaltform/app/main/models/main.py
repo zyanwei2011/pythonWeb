@@ -6,25 +6,48 @@
 # @Project : TestPaltform
 
 from ..models import BaseDb, db, current_app
+from app.main.errors.exceptions import DatabaseException
 
 
 class Project(BaseDb):
     __tablename__ = 'project'
     project_name = db.Column(db.String(32), nullable=False, unique=True)
     project_desc = db.Column(db.String(128), nullable=False)
+    status = 0
 
     @classmethod
-    def add_by_form(cls, form):
+    def insert(cls, data):
         """添加项目"""
-        # <input id="project_name" name="project_name" required type="text" value="123">
-        # 从html对象form中取值
-        p = cls(project_name=form.project_name.data,
-                project_desc=form.project_desc.data,
+        p = cls(project_name=data.get('project_name', ''),
+                project_desc=data.get('project_desc', ''),
                 )
         try:
             db.session.add(p)
             db.session.commit()
-            return p
         except Exception as e:
-            current_app.logger.error(f'添加项目错误：{e}')
-            raise e
+            current_app.logger.error(f'添加项目错误出错')
+            raise DatabaseException('数据库添加出错')    # 后端异常
+
+    @classmethod
+    def update(cls, data):
+        """更新项目"""
+        p = cls(project_name=data.get('project_name', ''),
+                project_desc=data.get('project_desc', ''),
+                )
+        try:
+            db.session.add(p)
+            db.session.commit()
+        except Exception as e:
+            current_app.logger.error(f'添加项目错误出错')
+            raise DatabaseException('数据库更新出错')    # 后端异常
+
+    def delete(self):
+        """删除项目"""
+        self.status = self.status
+        try:
+            db.session.add(self)
+            db.session.commit()
+            return self
+        except Exception as e:
+            current_app.logger.error(f'删除项目出错')
+            raise DatabaseException('数据库删除出错')    # 后端异常
