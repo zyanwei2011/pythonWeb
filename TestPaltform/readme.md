@@ -48,3 +48,35 @@ flask db downgrade
 # 查询项目
  curl 'http://127.0.0.1:5000/main/project_list' 
 ```
+### 项目运行
+#### gunicorn服务器
+```shell script
+# 安装
+ pip install guincorn
+
+# 启动服务
+ nohup gunicorn -w 4 -b 0.0.0.0:5555 run:app &
+```
+#### nginx反向代理
+
+```shell script
+# 配置nginx
+cd /usr/local/nginx
+vi conf/nginx.conf
+
+server {
+    listen       80;
+    server_name  localhost;
+
+
+    location / {
+        proxy_pass http://127.0.0.1:5555;
+        proxy_set_header HOST Shost;
+    }
+}   
+# 启动
+./sbin/nginx 
+
+# 重启
+./sbin/nginx -s reload 
+```
