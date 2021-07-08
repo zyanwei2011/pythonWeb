@@ -10,10 +10,10 @@ user_info = {'user': 'zhangsan', 'pwd': '123456'}
 
 project_data = {
     'code': 1,
-    'data': [{'title': '标题1', 'id': '1001'},
-             {'title': '标题2', 'id': '1002'},
-             {'title': '标题3', 'id': '1003'},
-             {'title': '标题4', 'id': '1004'}],
+    'data': [{'title': '项目1', 'id': '1001'},
+             {'title': '项目2', 'id': '1002'},
+             {'title': '项目3', 'id': '1003'},
+             {'title': '项目4', 'id': '1004'}],
     'msg': '四个项目'}
 
 # 接口数据
@@ -41,9 +41,9 @@ interface_data = {
 }
 
 
-# @app.route('/api/', methods=['get'])
-# def index():
-#     return render_template('index.html')
+@app.route('/api/', methods=['get'])
+def index():
+    return render_template('index.html')
 
 
 @app.route('/api/login', methods=['post'])
