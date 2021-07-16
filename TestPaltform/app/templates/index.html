@@ -1,160 +1,87 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>首页</title>
-    <link rel="stylesheet" href="../static/css/reset.css" type="text/css">
-    <link rel="stylesheet" href="../static/css/index.css" type="text/css">
-    <script type="text/javascript" src="../static/js/jquery-1.12.4.min.js"></script>
+{% extends "base.html" %}
+{% block title %}首页{% endblock %}
+
+{% block content %}
+    <!--内容部分-->
+    <div class="content">
+        <ul>
+            <!--展示项目-->
+            {% for project in projects[:5] %}
+            <li class="project">
+                <div class="pro_title">{{ project.project_name }}</div>
+
+                <!--TODO:写完接口和用例的关系设计用  project.modules | length  获取-->
+                <p>接口数:13</p>
+                <p>用例数:30</p>
+                <div class="del_pro"><a href="">删除项目</a></div>
+            </li>
+            {% endfor %}
+
+            <li class="project">
+                <div class="add">
+                    <img src="{{ url_for('static', filename='assets/img/ico.png') }}" alt="">
+                </div>
+
+            </li>
+        </ul>
+
+        <div style="height:400px; width: 100%;float: left"></div>
+
+    </div>
+
+
+    <!--弹框内容-->
+{#    <div class="back hide">#}
+{#        <div class="alter_add">#}
+{#            <div class="alter-title">新增项目</div>#}
+{#            <div class="alter_quit">#}
+{#                <img src="{{ url_for('static', filename='assets/img/ico01.png') }}">#}
+{#            </div>#}
+{#            <form action="">#}
+{#                <div class="alter_input">#}
+{#                    <label for="pro_title">项目名称 :</label>#}
+{#                    <input type="text" name="title" id="pro_title">#}
+{#                </div>#}
+{##}
+{#                <div class="alter_input">#}
+{#                    <label for="pro_url">项目地址 :</label>#}
+{#                    <input type="text" name="title" id="pro_url">#}
+{#                </div>#}
+{##}
+{#                <div class="alter_input">#}
+{#                    <label for="pro_test">测试人员 :</label>#}
+{#                    <input type="text" name="title" id="pro_test">#}
+{#                </div>#}
+{##}
+{#                <div class="pro_desc">#}
+{#                    <label for="">项目描述 :</label>#}
+{#                    <textarea name="" id="" cols="25" rows="5"></textarea>#}
+{#                </div>#}
+{#                <div class="pro_tj">#}
+{#                    <input class="tj" type="button" value="提交">#}
+{#                </div>#}
+{#            </form>#}
+{#        </div>#}
+{#    </div>#}
+
+
+
     <script type="text/javascript">
-        $(document).ready(function(){
-            // 弹框js
-            $('.add-pro').click(function(){
-                $('.alter-add').removeClass('hidden');
-                $('.alter-back').removeClass('hidden');
-            });
-            $('.alter-close').click(function(){
-                $('.alter-add').addClass('hidden');
-            });
-            // 左侧菜单
-
-            $('.first-menu').click(function(){
-                $(this).next().toggleClass('hidden')
-                    .parent().siblings().children('ul').addClass('hidden')
-            });
+        // 添加项目 跳出弹框
+        $('.add').click(function () {
+            $('.back').addClass('show');
+        });
+        //关闭弹框
+        $('.alter_quit').click(function () {
+            $('.back').removeClass('show');
+        });
+        $('.tj').click(function () {
+            $('.back').removeClass('show');
+        });
 
 
-        })
     </script>
-</head>
-<body>
-    <div class="header">
-        <div class="title">自动化测试平台</div>
-        <div class='menu_list'>
-            <ul>
-                <a href="">
-                    <li>首页</li>
-                </a>
-                <a href="">
-                    <li>接口列表</li>
-                </a>
-                <a href="">
-                    <li>用例列表</li>
-                </a>
-                <a href="">
-                    <li>套件列表</li>
-                </a>
-                <a href="">
-                    <li>测试报告</li>
-                </a>
-            </ul>
-        </div>
-        <div class="login_info">
-            <a href="">注销登录</a>
-        </div>
-    </div>
-    <div class="left_content">
-        <div class="left-title">项目管理</div>
-        <div class="left-menu-list">
-            <ul>
-                <li>
-                    <h3  class="first-menu">接口管理</h3>
-                    <ul class="second-menu hidden">
-                        <li class="left-menu-list"><a href="">添加接口</a></li>
-                        <li class="left-menu-list"><a href="">接口列表</a></li>
-                    </ul>
-                </li>
-                <li>
-                    <h3 class="first-menu">接口管理</h3>
-                    <ul class="second-menu hidden">
-                        <li class="left-menu-list"><a href="">添加接口</a></li>
-                        <li class="left-menu-list"><a href="">接口列表</a></li>
-                    </ul>
-                </li>
-                <li>
-                    <h3 class="first-menu">接口管理</h3>
-                    <ul class="second-menu hidden">
-                        <li class="left-menu-list"><a href="">添加接口</a></li>
-                        <li class="left-menu-list"><a href="">接口列表</a></li>
-                    </ul>
-                </li>
-                <li>
-                    <h3 class="first-menu">接口管理</h3>
-                    <ul class="second-menu hidden">
-                        <li class="left-menu-list"><a href="">添加接口</a></li>
-                        <li class="left-menu-list"><a href="">接口列表</a></li>
-                    </ul>
-                </li>
-            </ul>
-        </div>
-    </div>
-    <div class="right_content">
-        <div class="pro-info">
-            <div class="pro-title">项目A</div>
-            <p>用例数量：44</p>
-            <p>接口数量：5</p>
-            <div class="del-pro"><a href="">删除</a></div>
-        </div>
-        <div class="pro-info">
-            <div class="pro-title">项目B</div>
-            <p>用例数量：44</p>
-            <p>接口数量：5</p>
-            <div class="del-pro"><a href="">删除</a></div>
-        </div>
-        <div class="pro-info">
-            <div class="pro-title">项目C</div>
-            <p>用例数量：44</p>
-            <p>接口数量：5</p>
-            <div class="del-pro"><a href="">删除</a></div>
-        </div>
-        <div class="pro-info">
-            <div class="pro-title">项目D</div>
-            <p>用例数量：44</p>
-            <p>接口数量：5</p>
-            <div class="del-pro"><a href="">删除</a></div>
-        </div>
-        <div class="pro-info">
-            <div class="pro-title">项目E</div>
-            <p>用例数量：44</p>
-            <p>接口数量：5</p>
-            <div class="del-pro"><a href="">删除</a></div>
-        </div>
-        <div class="pro-info">
-            <div class="add-pro">
-                <div class="add-pro"><lable href="">添加</lable></div>
-            </div>
-        </div>
-    </div> 
-    <div class="footer">底部边框</div>
-    <div class="alter-back hidden">
-        <div class="alter-add hidden">
-            <div class="alter-close"><a href="">关闭</a></div>
-            <div class="alter-title"><h2>新增项目</h2></div>
-            <form action="" method="POST">
-                <div class="alter-input">
-                    <label for="pro-title">项目名称：</label>
-                    <input type="text" id='pro-title' name='pro-title'>
-                </div>
-                <div class="alter-input">
-                    <label for="pro-addr">项目地址：</label>
-                    <input type="text" id='pro-addr' name='pro-addr'>
-                </div>
-                <div class="alter-input">
-                    <label for="pro-tester">测试人员：</label>
-                    <input type="text" id='pro-tester' name='pro-tester'>
-                </div>
-                <div class="alter-input">
-                    <label for="pro-desc">项目描述：</label>
-                    <textarea id='pro-desc' name="" rows="3" cols="40"></textarea>
-                </div>
-                <div class="pro-submit">
-                    <input type="button"  value='提交'>
-                </div>
 
-            </form>
-        </div>
-    </div>
-</body>
-</html>
 
+
+{% endblock %}

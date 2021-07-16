@@ -1,14 +1,9 @@
+#!/usr/bin/env python3
+#-*- coding:utf-8 -*-
+# author:muji
+# datetime:2019/8/1 13:46
+from flask import Blueprint
 
-from flask import Blueprint, request
+web = Blueprint('web', __name__)
 
-main = Blueprint('main', __name__, url_prefix='/main')
-
-from .views.index import index
-from .views.projects import project_create, project_list, project_edit
-from .views.modules import create_modules, list_modules
-from .views.suites import create_suites, list_suites
-from .views.cases import create_cases, list_cases
-
-
-
-
+from app.main.views import index, cases, modules, projects, suites, ajax_view, user

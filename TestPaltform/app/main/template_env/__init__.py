@@ -1,22 +1,24 @@
-# -*- coding: utf-8 -*-
-# @Time : 2021/5/12 1:59 下午
-# @Author : zy
-# @Email : zyanwei2011@163.com
-# @File : __init__.py
-# @Project : TestPaltform
-
-"""
-过滤器文件
-"""
-
+#!/usr/bin/env python3
+# -*- coding:utf-8 -*-
+# author:muji
+# datetime:2019/8/5 14:38
+import json
 from datetime import datetime
 
 
 def str_time(ts):
-    """
-    将时间戳转为时间
-    """
     return datetime.fromtimestamp(ts)
 
+def json_loads(my_str):
+    try:
+        return json.loads(my_str)
+    except ValueError:
+        return my_str
 
-
+# def add_global():
+#     def json_loads(my_str):
+#         try:
+#             return json.loads(my_str)
+#         except ValueError:
+#             return my_str
+#     return dict(json_loads=json_loads)
