@@ -1,0 +1,35 @@
+# 第1部分，指定Docker-Compose 版本
+version: '3.3' 
+# 第2部分，定义容器
+services:
+  db:
+    image: mysql:5.7
+    command: --default-authentication-plugin=mysql_native_password
+    restart: always   # 当运行容器失败后重启的策略
+    container_name: apitest-db
+    volumes:
+      - dbdata:/var/lib/mysql  # 宿主机：docker目录
+    environment:
+      MYSQL_ROOT_PASSWORD: 123456
+      MYSQL_DATABASE: dev01
+  app:
+    depends_on: # 制定容器的启动依赖
+      - db
+    build: .
+    image: zyanwei2011/apitest:v1.0
+    container_name: apitest_d
+    restart: always
+    ports:
+      - 5000:5000
+    volumes:
+      - mycode:/usr/src/app/dev01/
+      - logs:/usr/src/app/logs/
+    environment:
+      FLASK_APP: run.py
+
+
+# 第3部分，声明要创建的全局数据卷
+volumes:  # 声明要创建的全局数据卷
+  dbdata:
+  mycode:
+  logs:

@@ -2,6 +2,7 @@ version: '1' # 表示该 Docker-Compose 文件使用的是 Version 1 file
 services:
   docker-demo:  # 指定服务名称
     image: demo:v1 # 指定镜像名称
+    container_name: ddemo
     build: .  # 指定 Dockerfile 所在路径
     ports:    # 指定端口映射
       - "8000:5000"
